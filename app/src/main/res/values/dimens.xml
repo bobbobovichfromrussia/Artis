@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_medium">10dp</dimen>
+    <dimen name="view_item_padding">10dp</dimen>
+    <dimen name="recyclerview_item_padding">10dp</dimen>
+    <dimen name="recyclerview_item_text_margin">10dp</dimen>
+    <dimen name="recyclerview_item_corner_radius">10dp</dimen>
+    <dimen name="recyclerview_item_logo_width">40dp</dimen>
+    <dimen name="recyclerview_item_logo_height">40dp</dimen>
+</resources>

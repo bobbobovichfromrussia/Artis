@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/margin_medium"
+    android:layout_marginTop="@dimen/margin_medium"
+    android:gravity="center_vertical"
+    android:padding="@dimen/recyclerview_item_padding"
+    android:background="@drawable/recyclerview_item_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/recyclerview_item_logo_width"
+            android:layout_height="@dimen/recyclerview_item_logo_height"
+            android:src="@drawable/ic_home"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/news_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem Ipsum"
+                android:textColor="@color/recyclerview_text"
+                android:layout_margin="@dimen/recyclerview_item_text_margin"/>
+
+            <TextView
+                android:id="@+id/news_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/recyclerview_text"
+                android:text="@string/lorem_ipsum"
+                android:layout_margin="@dimen/recyclerview_item_text_margin"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

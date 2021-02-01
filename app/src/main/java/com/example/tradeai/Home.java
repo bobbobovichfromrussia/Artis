@@ -3,10 +3,20 @@ package com.example.tradeai;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+
+import java.util.List;
+
+import at.theengine.android.simple_rss2_android.RSSItem;
+import at.theengine.android.simple_rss2_android.SimpleRss2Parser;
+import at.theengine.android.simple_rss2_android.SimpleRss2ParserCallback;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,34 +24,17 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class Home extends Fragment {
+    private View view;
+    private String[] newsTitles;
+    private String[] newsContent;
+    private CustomAdapter customAdapter;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    public Home() {}
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Home() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Home.
-     */
     // TODO: Rename and change types and number of parameters
     public static Home newInstance(String param1, String param2) {
         Home fragment = new Home();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,8 +43,6 @@ public class Home extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -59,6 +50,41 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        SimpleRss2Parser parser =
+                new SimpleRss2Parser("https://lorem-rss.herokuapp.com/feed", getRssCallback());
+        parser.parseAsync();
+
+        newsTitles = new String[] {"title1","title2","title3","title4","title5","title6"};
+        newsContent = new String[] {"lorem ipsum","lorem ipsum","lorem ipsum","lorem ipsum","lorem ipsum","lorem ipsum",};
+
+        customAdapter = new CustomAdapter(newsTitles,newsContent);
+        FrameLayout recyclerviewContainer = (FrameLayout) view.findViewById(R.id.recyclerview_container);
+        RecyclerView recyclerView = new RecyclerView(requireActivity());
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        recyclerviewContainer.addView(recyclerView);
+        return view;
+    }
+
+    private SimpleRss2ParserCallback getRssCallback(){
+        return new SimpleRss2ParserCallback() {
+            @Override
+            public void onFeedParsed(List<RSSItem> list) {
+                newsTitles = new String[list.size()];
+                newsContent = new String[list.size()];
+                for(int i=0; i<list.size(); i++){
+                    newsTitles[i] = list.get(i).getTitle();
+                    newsContent[i] = list.get(i).getDescription();
+                }
+                customAdapter.updateData(newsTitles,newsContent);
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        };
     }
 }
