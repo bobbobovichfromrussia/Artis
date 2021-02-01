@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/corportate">
+
+    <fragment
+        android:id="@+id/corportate"
+        android:name="com.example.tradeai.Corportate"
+        android:label="fragment_corportate"
+        tools:layout="@layout/fragment_corportate" />
+    <fragment
+        android:id="@+id/daily"
+        android:name="com.example.tradeai.Daily"
+        android:label="fragment_daily"
+        tools:layout="@layout/fragment_daily" />
+    <fragment
+        android:id="@+id/home2"
+        android:name="com.example.tradeai.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/portfolio"
+        android:name="com.example.tradeai.Portfolio"
+        android:label="fragment_portfolio"
+        tools:layout="@layout/fragment_portfolio" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.tradeai.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
